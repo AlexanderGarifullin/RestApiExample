@@ -25,9 +25,14 @@ public class MainController {
 
     @SneakyThrows
     @GetMapping("api/all")
-    public String getAll(){
-        List<Cat> cats = catRepository.findAll();
-        return objectMapper.writeValueAsString(cats);
+    public List<Cat> getAll(){
+        return catRepository.findAll();
     }
+
+    @GetMapping("/api")
+    public Cat getCat(@RequestParam int id){
+        return catRepository.findById(id).orElseThrow();
+    }
+
 
 }
