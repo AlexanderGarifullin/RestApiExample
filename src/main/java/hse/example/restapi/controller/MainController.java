@@ -39,5 +39,11 @@ public class MainController {
         catRepository.deleteById(id);
     }
 
-
+    @PutMapping("/api/edit")
+    public String changeCat(@RequestBody Cat cat) {
+        if (!catRepository.existsById(cat.getId())) {
+            return "No such row";
+        }
+        return cat.toString();
+    }
 }
