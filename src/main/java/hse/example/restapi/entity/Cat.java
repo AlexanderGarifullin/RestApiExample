@@ -1,15 +1,11 @@
 package hse.example.restapi.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "cats")
-@AllArgsConstructor
-@NoArgsConstructor
 public class Cat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,4 +17,13 @@ public class Cat {
     private int age;
 
     private int weight;
+
+    public Cat(String name, int age, int weight) {
+        this.name = name;
+        this.age = age;
+        this.weight = weight;
+    }
+
+    public Cat() {
+    }
 }
