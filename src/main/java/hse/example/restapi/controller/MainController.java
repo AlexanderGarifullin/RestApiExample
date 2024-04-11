@@ -1,6 +1,7 @@
 package hse.example.restapi.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import hse.example.restapi.DTO.CatDTO;
 import hse.example.restapi.entity.Cat;
 import hse.example.restapi.repository.CatRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +20,12 @@ public class MainController {
     private final ObjectMapper objectMapper;
 
     @PostMapping("/api/add")
-    public void addCat(@RequestBody Cat cat){
-        log.info("New row: " + catRepository.save(cat));
+    public void addCat(@RequestBody CatDTO catDTO){
+        log.info("New row: " + catRepository.save(Cat.builder()
+                        .age(catDTO.getAge())
+                        .weight(catDTO.getWeight())
+                        .name(catDTO.getName())
+                        .build()));
     }
 
     @SneakyThrows
@@ -39,11 +44,11 @@ public class MainController {
         catRepository.deleteById(id);
     }
 
-    @PutMapping("/api/edit")
-    public String changeCat(@RequestBody Cat cat) {
-        if (!catRepository.existsById(cat.getId())) {
-            return "No such row";
-        }
-        return cat.toString();
-    }
+//    @PutMapping("/api/edit")
+//    public String changeCat(@RequestBody CatDTO catDTO) {
+//        if (!catRepository.existsById(cat.getId())) {
+//            return "No such row";
+//        }
+//        return cat.toString();
+//    }
 }
