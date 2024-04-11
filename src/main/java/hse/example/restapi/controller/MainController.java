@@ -34,5 +34,10 @@ public class MainController {
         return catRepository.findById(id).orElseThrow();
     }
 
+    @DeleteMapping("/api")
+    public void deleteCat(@RequestParam int id) {
+        catRepository.deleteById(id);
+    }
+
 
 }
